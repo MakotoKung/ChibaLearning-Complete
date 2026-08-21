@@ -1,0 +1,212 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * PixelPath design system — 16-bit RPG interface.
+ * Fonts are loaded with <link> tags in src/routes/__root.tsx.
+ */
+
+@theme inline {
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
+  --font-pixel: "Press Start 2P", monospace;
+  --font-terminal: "VT323", monospace;
+  --font-sans: "IBM Plex Sans Thai", system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-gold: var(--gold);
+  --color-gold-foreground: var(--gold-foreground);
+  --color-magic: var(--magic);
+  --color-terminal: var(--terminal);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+}
+
+:root {
+  --radius: 0px;
+  --background: oklch(0.17 0.045 268);
+  --foreground: oklch(0.94 0.02 220);
+  --surface: oklch(0.23 0.05 268);
+  --surface-2: oklch(0.28 0.055 268);
+  --card: oklch(0.23 0.05 268);
+  --card-foreground: oklch(0.94 0.02 220);
+  --popover: oklch(0.23 0.05 268);
+  --popover-foreground: oklch(0.94 0.02 220);
+  --primary: oklch(0.72 0.14 186);
+  --primary-foreground: oklch(0.17 0.045 268);
+  --secondary: oklch(0.32 0.06 268);
+  --secondary-foreground: oklch(0.94 0.02 220);
+  --muted: oklch(0.28 0.05 268);
+  --muted-foreground: oklch(0.72 0.03 250);
+  --accent: oklch(0.66 0.19 320);
+  --accent-foreground: oklch(0.97 0.01 320);
+  --destructive: oklch(0.62 0.21 22);
+  --destructive-foreground: oklch(0.97 0.01 22);
+  --border: oklch(0.38 0.06 268);
+  --input: oklch(0.3 0.05 268);
+  --ring: oklch(0.72 0.14 186);
+  --gold: oklch(0.83 0.16 88);
+  --gold-foreground: oklch(0.2 0.05 60);
+  --magic: oklch(0.7 0.18 300);
+  --terminal: oklch(0.86 0.19 145);
+}
+
+.dark {
+  --background: oklch(0.17 0.045 268);
+  --foreground: oklch(0.94 0.02 220);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-pixel);
+    line-height: 1.5;
+  }
+
+  img {
+    image-rendering: pixelated;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--surface);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border: 2px solid var(--background);
+  }
+}
+
+/* Chunky 16-bit panel with hard pixel shadow */
+@utility pixel-panel {
+  background: var(--surface);
+  border: 3px solid var(--border);
+  box-shadow:
+    0 0 0 3px var(--background),
+    6px 6px 0 0 rgba(0, 0, 0, 0.55);
+}
+
+@utility pixel-inset {
+  background: var(--background);
+  border: 3px solid var(--border);
+  box-shadow: inset 3px 3px 0 0 rgba(0, 0, 0, 0.5);
+}
+
+@utility pixel-btn {
+  font-family: var(--font-pixel);
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  padding: 0.85rem 1.1rem;
+  border: 3px solid var(--background);
+  box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 0.6);
+  transition:
+    transform 80ms steps(2),
+    box-shadow 80ms steps(2);
+  &:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 0 rgba(0, 0, 0, 0.6);
+  }
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 0 rgba(0, 0, 0, 0.6);
+  }
+  &:disabled {
+    opacity: 0.5;
+    transform: none;
+    box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 0.6);
+  }
+}
+
+@utility pixel-text {
+  font-family: var(--font-pixel);
+}
+
+@utility terminal-text {
+  font-family: var(--font-terminal);
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+
+@utility scanlines {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.18) 0px,
+      rgba(0, 0, 0, 0.18) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+}
+
+@utility float-idle {
+  animation: float-idle 2.4s steps(4, end) infinite;
+}
+
+@keyframes float-idle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@utility blink-cursor {
+  animation: blink-cursor 1s steps(2, end) infinite;
+}
+
+@keyframes blink-cursor {
+  50% {
+    opacity: 0;
+  }
+}
